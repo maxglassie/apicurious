@@ -18,4 +18,15 @@ class GithubOauth
     data = JSON.parse(oauth_response.body)
     data
   end
+
+  def followers
+    followers_response = Faraday.get("https://api.github.com/users/maxglassie/followers")
+    followers = JSON.parse(followers_response.body)
+  end
+
+  def repositories
+    repositories_response = Faraday.get("https://api.github.com/users/maxglassie/repos")
+    repositories = JSON.parse(repositories_response.body)
+    binding.pry
+  end
 end

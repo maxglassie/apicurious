@@ -8,6 +8,8 @@ class SessionsController < ApplicationController
       
       session[:user_id] = user.id
 
+      github_oauth.followers
+
       redirect_to dashboard_path
     end
 
