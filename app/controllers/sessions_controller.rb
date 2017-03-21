@@ -1,10 +1,18 @@
 class SessionsController < ApplicationController
     def create
-      binding.pry
-      code = params['code']
-      client_id = ENV['client_id']
-      client_secret = ENV['client_secret']
+      github_oauth = GithubOauth.new(params['code'])
+      access_token = github_oauth.access_token
+      data = github_oauth.data
 
-      response  = Faraday.post("https://github.com/login/oauth/access_token?client_id=#{client_id}&client_secret=#{client_secret}&code=#{code}")
+      user = User.from_github(data, access_token)
+      
+      session[:user_id] = user.id
+
+      redirect_to dashboard_path
+    end
+
+    def destroy
+      session.clear
+      redirect_to root_path
     end
 end
