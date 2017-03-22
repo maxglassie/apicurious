@@ -18,4 +18,5 @@ class GithubOauth
     data = JSON.parse(oauth_response.body)
     data
   end
+
 end
