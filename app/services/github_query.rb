@@ -7,6 +7,11 @@ class GithubQuery
     @auth = "?client_id=#{ENV['client_id']}&client_secret=#{ENV['client_secret']}"
   end
 
+  def profile
+    profile_response = Faraday.get("https://api.github.com/users/#{@user.username}#{@auth}")
+    profile = JSON.parse(profile_response.body)
+  end
+
   def followers
     followers_response = @connection.get("/users/#{@user.username}/followers#{@auth}")
     followers = JSON.parse(followers_response.body)
@@ -20,11 +25,6 @@ class GithubQuery
   def events
     events_response = Faraday.get("https://api.github.com/users/#{@user.username}/events#{@auth}")
     events = JSON.parse(events_response.body)
-  end
-
-  def profile
-    profile_response = Faraday.get("https://api.github.com/users/#{@user.username}#{@auth}")
-    profile = JSON.parse(profile_response.body)
   end
 
 end

@@ -22,6 +22,13 @@ describe GithubQuery do
       expect(@query.user.username).to eq("maxglassie")
     end
 
+    it "returns the user profile" do
+      profile = @query.profile
+
+      expect(profile["login"]).to eq("maxglassie")
+      expect(profile["url"]).to eq("https://api.github.com/users/maxglassie")
+    end
+
     it "returns followers" do
       followers = @query.followers
 
@@ -38,12 +45,8 @@ describe GithubQuery do
     it "returns events" do
       events = @query.events
 
-      expect(events.first).to eq("advanced_enums")
-      expect(events.first["owner"]["login"]).to eq("maxglassie")
+      expect(events.first["actor"]["login"]).to eq("maxglassie")
+      expect(events.first["payload"]["issue"]["repository_url"]).to eq("https://api.github.com/repos/maxglassie/apicurious")
     end
-
-    #repos
-    #events
-    #profile
   end
 end
