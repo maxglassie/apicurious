@@ -25,9 +25,14 @@ gem 'figaro'
 
 group :development, :test do
   gem 'byebug', platform: :mri
+  gem 'rspec-rails'
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'pry'
+  gem 'vcr'
+  gem 'webmock'
+  gem 'capybara'
+  gem 'launchy'
 end
 
 group :development do
