@@ -46,7 +46,6 @@ describe GithubQuery do
       events = @query.events
 
       expect(events.first["actor"]["login"]).to eq("maxglassie")
-      expect(events.first["payload"]["issue"]["repository_url"]).to eq("https://api.github.com/repos/maxglassie/apicurious")
     end
   end
 end
