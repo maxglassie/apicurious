@@ -1,32 +1,30 @@
 require 'rails_helper'
 
 describe Follower do
-  attr_reader :query
+  attr_reader :user
 
   before(:each) do
     uid = 19553401
     username = "maxglassie"
     token = "token"
 
-    user = User.create(uid: uid, username: username, token: token)
-    @query = GithubQuery.new(user)
+    activerecord_user = User.create(uid: uid, username: username, token: token)
+    @user = GithubUser.new(activerecord_user)
+    @follower = @user.followers.first
   end
 
   describe "#follower", :vcr do
-    xit 'takes a github query object as an argument' do
-      follower  = Follower.new(@query)
+    it 'it takes a follower data hash as an argument' do
+      follower  = Follower.new(@follower)
 
-      expect(follower.query.user.username).to eq("maxglassie")
+      expect(follower.class).to eq(Follower)
     end
 
-    it 'follower.all returns an array of follower objects' do
-      followers = Follower.all
+    it 'it returns the username as login' do
+      follower  = Follower.new(@follower)
 
-      expect(followers.first.username).to eq("Carmer")
+      expect(follower.login).to eq("Carmer")
     end
-
-
-
   end
 
 end
