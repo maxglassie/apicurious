@@ -8,7 +8,7 @@ class GithubQuery
   end
 
   def profile
-    profile_response = Faraday.get("https://api.github.com/users/#{@user.username}#{@auth}")
+    profile_response = @connection.get("/users/#{@user.username}#{@auth}")
     profile = JSON.parse(profile_response.body)
   end
 
@@ -18,12 +18,12 @@ class GithubQuery
   end
 
   def repos
-    repos_response = Faraday.get("https://api.github.com/users/#{@user.username}/repos#{@auth}")
+    repos_response = @connection.get("/users/#{@user.username}/repos#{@auth}")
     repos = JSON.parse(repos_response.body)
   end
 
   def events
-    events_response = Faraday.get("https://api.github.com/users/#{@user.username}/events#{@auth}")
+    events_response = @connection.get("/users/#{@user.username}/events#{@auth}")
     events = JSON.parse(events_response.body)
   end
 
