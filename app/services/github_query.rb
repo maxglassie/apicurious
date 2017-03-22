@@ -1,5 +1,5 @@
 class GithubQuery
-  attr_reader :followers, :connection
+  attr_reader :followers, :connection, :auth, :user
 
   def initialize(current_user)
     @connection = Faraday.new('https://api.github.com')
@@ -14,16 +14,16 @@ class GithubQuery
 
   def repos
     repos_response = Faraday.get("https://api.github.com/users/#{@user.username}/repos#{@auth}")
-    repos = JSON.parse(repositories_response.body)
+    repos = JSON.parse(repos_response.body)
   end
 
   def events
-    events_response = Faraday.get("https://api.github.com/users/#{@user.username}/repos")
+    events_response = Faraday.get("https://api.github.com/users/#{@user.username}/events#{@auth}")
     events = JSON.parse(events_response.body)
   end
 
   def profile
-    profile_response = Faraday.get("https://api.github.com/users/#{@user.username}")
+    profile_response = Faraday.get("https://api.github.com/users/#{@user.username}#{@auth}")
     profile = JSON.parse(profile_response.body)
   end
 
