@@ -1,12 +1,10 @@
 require 'rails_helper'
 
 describe GithubUser do
-  attr_reader :query
-
   before(:each) do
     uid = 19553401
     username = "maxglassie"
-    token = "token"
+    token = ENV['access_token']
 
     activerecord_user = User.create(uid: uid, username: username, token: token)
     @github_user = GithubUser.new(activerecord_user)

@@ -1,8 +1,8 @@
 <h1 class="home"> Welcome, You're Authorized </h1>
-  <h2 class="home"> <%= @user.username %> </h2>
+  <h2 class="home"> <%= @presenter.user.username %> </h2>
 
-<ul> <% @query.followers.each do |follower| %>
-  <li> <%= follower %></li>
+<ul> <% @presenter.followers.each do |follower| %>
+  <li> <%= follower.login %></li>
 <% end %>
 </ul>
 

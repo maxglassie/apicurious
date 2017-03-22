@@ -1,5 +1,5 @@
 class GithubQuery
-  attr_reader :followers, :connection, :auth, :user
+  attr_reader :connection, :auth, :user
 
   def initialize(user)
     @connection = Faraday.new('https://api.github.com')
