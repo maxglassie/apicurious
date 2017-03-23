@@ -46,7 +46,7 @@ describe GithubUser do
     it 'received_events returns an array of event objects' do
       received_events = @github_user.received_events
 
-      expect(received_events.first.repo["name"]).to eq("alfosco/apicurious")
+      expect(received_events.first.repo["name"]).to eq("case-eee/kackle")
     end
 
     it 'following returns an array of follower objects' do
@@ -54,6 +54,13 @@ describe GithubUser do
 
       expect(following.first.login).to eq("Carmer")
       expect(following.first.class).to eq(Follower)
+    end
+
+    xit 'following returns an array of organization objects' do
+      organizations = @github_user.organizations
+
+      expect(organizations.first.name).to eq("APICuriousTest")
+      expect(organizations.first.class).to eq(Organization)
     end
   end
 

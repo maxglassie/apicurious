@@ -21,3 +21,6 @@
 
 #ignore VCR cassettes
 /spec/cassettes
+
+#simplecov
+coverage

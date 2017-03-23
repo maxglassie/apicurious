@@ -10,7 +10,7 @@ describe GithubQuery do
     token = "token"
 
     user = User.create(uid: uid, username: username, token: token)
-    @query = GithubQuery.new(user)
+    @query = GithubQuery.new(user.username)
   end
 
   describe "github query service calls the github API", :vcr do
@@ -19,7 +19,7 @@ describe GithubQuery do
 
       expect(connection.url_prefix.to_s).to eq('https://api.github.com/')
       expect(@query.auth).to eq("?client_id=#{ENV['client_id']}&client_secret=#{ENV['client_secret']}")
-      expect(@query.user.username).to eq("maxglassie")
+      expect(@query.username).to eq("maxglassie")
     end
 
     it "returns the user profile" do

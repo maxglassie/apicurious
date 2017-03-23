@@ -1,7 +1,7 @@
 require 'rails_helper'
 
-describe Repo do
-
+describe Organization do
+  
   before(:each) do
     uid = 19553401
     username = "maxglassie"
@@ -15,20 +15,20 @@ describe Repo do
                                                             image: image,
                                                             name: name)
     @user = GithubUser.new(@activerecord_user)
-    @repo = @user.query.repos.first
+    @organization = @user.query.organizations.first
   end
 
-  describe "#repo", :vcr do
-    it 'it takes a repo data hash as an argument' do
-      repo  = Repo.new(@repo)
-
-      expect(repo.class).to eq(Repo)
+  describe "#organization", :vcr do
+    xit 'it takes an organization data hash as an argument' do
+      organization  = Organization.new(@organization)
+      binding.pry
+      expect(organization.class).to eq(Organization)
     end
 
-    it 'it returns the repo name as name' do
-      repo  = Repo.new(@repo)
+    xit 'it returns the organization name' do
+      organization  = Organization.new(@organization)
 
-      expect(repo.name).to eq("advanced_enums")
+      expect(organization).to eq("maxglassie")
     end
   end
 
