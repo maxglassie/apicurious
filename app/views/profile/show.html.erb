@@ -1,8 +1,12 @@
-<%= image_tag @presenter.user.image %>
+<%= image_tag(@presenter.user.image) %>
 <h1> <%= @presenter.user.name %> </h1>
 <h2> <%=  @presenter.user.username %>  </h2>
 
-<h3> <% @presenter.followers.each do |follower| %></h3>
-    <%= follower.login %>
-    <%= image_tag follower.avatar_url %>
-  <% end %>
+<div>
+  <ul>
+    <% @presenter.followers.each do |follower| %></h3>
+      <%= image_tag follower.avatar_url %>
+      <li><%= follower.login %></li>
+    <% end %>
+  </ul>
+</div>

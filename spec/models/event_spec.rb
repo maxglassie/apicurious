@@ -1,7 +1,8 @@
 require 'rails_helper'
 
-RSpec.feature "on the profile page user can view all their followers", :vcr do
-    before(:each) do
+describe Event do
+  
+  before(:each) do
     uid = 19553401
     username = "maxglassie"
     name = "Max Glassie"
@@ -13,15 +14,22 @@ RSpec.feature "on the profile page user can view all their followers", :vcr do
                                                             token: token,
                                                             image: image,
                                                             name: name)
-    allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@activerecord_user)
+    @user = GithubUser.new(@activerecord_user)
+    @event = @user.events.first
   end
 
-  scenario "user sees all their followers" do
-    #as a user, I visit my profile page
-    visit profile_path(@activerecord_user)
+  describe "#event", :vcr do
+    it 'it takes an event data hash as an argument' do
+      event  = Event.new(@event)
 
-    #and I see a list of followers
-    expect(page).to have_content("Carmer")
-    expect(page).to have_content("briancaffey")
+      expect(event.class).to eq(Event)
+    end
+
+    it 'it returns the event name as' do
+      event  = Event.new(@event)
+
+      expect(event.actor["login"]).to eq("maxglassie")
+    end
   end
+
 end

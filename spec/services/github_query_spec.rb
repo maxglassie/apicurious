@@ -47,5 +47,30 @@ describe GithubQuery do
 
       expect(events.first["actor"]["login"]).to eq("maxglassie")
     end
+
+    it "returns organizations" do
+      organizations = @query.organizations
+
+      expect(organizations).to eq([])
+    end
+
+    it "returns number of starred repos" do
+      starred = @query.starred
+
+      expect(starred.count).to eq(4)
+      expect(starred.first["name"]).to eq("reddit-graph-analysis")
+    end
+
+    it "returns received events" do
+      received_events = @query.received_events
+
+      expect(received_events.first["public"]).to eq(true)
+    end
+
+    it "returns following" do
+      following = @query.following
+
+      expect(following.first["login"]).to eq("Carmer")
+    end
   end
 end

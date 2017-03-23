@@ -1,7 +1,8 @@
 require 'rails_helper'
 
-RSpec.feature "on the profile page user can view all their followers", :vcr do
-    before(:each) do
+describe Repo do
+
+  before(:each) do
     uid = 19553401
     username = "maxglassie"
     name = "Max Glassie"
@@ -13,15 +14,22 @@ RSpec.feature "on the profile page user can view all their followers", :vcr do
                                                             token: token,
                                                             image: image,
                                                             name: name)
-    allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@activerecord_user)
+    @user = GithubUser.new(@activerecord_user)
+    @repo = @user.repos.first
   end
 
-  scenario "user sees all their followers" do
-    #as a user, I visit my profile page
-    visit profile_path(@activerecord_user)
+  describe "#repo", :vcr do
+    it 'it takes a repo data hash as an argument' do
+      repo  = Repo.new(@repo)
 
-    #and I see a list of followers
-    expect(page).to have_content("Carmer")
-    expect(page).to have_content("briancaffey")
+      expect(repo.class).to eq(Repo)
+    end
+
+    it 'it returns the repo name as name' do
+      repo  = Repo.new(@repo)
+
+      expect(repo.name).to eq("advanced_enums")
+    end
   end
+
 end
