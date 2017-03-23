@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe Follower do
+describe Follower, :vcr do
   attr_reader :user
 
   before(:each) do
@@ -10,7 +10,7 @@ describe Follower do
 
     activerecord_user = User.create(uid: uid, username: username, token: token)
     @user = GithubUser.new(activerecord_user)
-    @follower = @user.followers.first
+    @follower = @user.query.followers.first
   end
 
   describe "#follower", :vcr do
@@ -24,6 +24,12 @@ describe Follower do
       follower  = Follower.new(@follower)
 
       expect(follower.login).to eq("Carmer")
+    end
+
+    it 'it has a method repos' do
+      follower  = Follower.new(@follower)
+
+      expect(follower.repos.first.name).to eq("1508-task-manager")
     end
   end
 

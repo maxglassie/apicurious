@@ -34,6 +34,7 @@ group :development, :test do
   gem 'webmock'
   gem 'capybara'
   gem 'launchy'
+  gem 'simplecov', :require => false, :group => :test
 end
 
 group :development do
