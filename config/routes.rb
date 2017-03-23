@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get '/profile/:id', to: 'profile#show', as: 'profile'
   get '/dashboard', to: 'dashboard#show'
   get '/auth/github/callback', to: 'sessions#create'
   get '/logout', to: 'sessions#destroy'

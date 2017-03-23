@@ -1,5 +1,5 @@
 class GithubQuery
-  attr_reader :followers, :connection, :auth, :user
+  attr_reader :connection, :auth, :user
 
   def initialize(user)
     @connection = Faraday.new('https://api.github.com')
@@ -27,4 +27,23 @@ class GithubQuery
     events = JSON.parse(events_response.body)
   end
 
+  def organizations
+    orgs_response = @connection.get("/users/#{@user.username}/orgs#{@auth}")
+    organizations = JSON.parse(orgs_response.body)
+  end
+
+  def starred
+    starred_response = @connection.get("/users/#{@user.username}/starred#{@auth}")
+    starred = JSON.parse(starred_response.body)
+  end
+
+  def received_events
+    received_events_response = @connection.get("/users/#{@user.username}/received_events#{@auth}")
+    received = JSON.parse(received_events_response.body)
+  end
+
+  def following
+    following_response = @connection.get("/users/#{@user.username}/following#{@auth}")
+    following = JSON.parse(following_response.body)
+  end
 end
