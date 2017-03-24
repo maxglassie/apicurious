@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe Repo do
+describe Commit do
 
   before(:each) do
     uid = 19553401
@@ -15,26 +15,26 @@ describe Repo do
                                                             image: image,
                                                             name: name)
     @user = GithubUser.new(@activerecord_user)
-    @repo = @user.query.repos.first
+    @commit = @user.repos.first.query.commits.first
   end
 
-  describe "#repo", :vcr do
-    it 'it takes a repo data hash as an argument' do
-      repo  = Repo.new(@repo)
+  describe "#commit", :vcr do
+    it 'it takes a commit data hash as an argument' do
+      commit  = Commit.new(@commit)
 
-      expect(repo.class).to eq(Repo)
+      expect(commit.class).to eq(Commit)
     end
 
-    it 'it returns the repo name as name' do
-      repo  = Repo.new(@repo)
+    it 'it returns the author name' do
+      commit  = Commit.new(@commit)
 
-      expect(repo.name).to eq("advanced_enums")
+      expect(commit.commit["author"]["name"]).to eq("Max Glassie")
     end
 
-    it 'it returns commits from repo' do
-      repo  = Repo.new(@repo)
+    it 'it returns the commit message' do
+      commit  = Commit.new(@commit)
 
-      expect(repo.commits.first.commit["author"]["name"]).to eq("Max Glassie")
+      expect(commit.commit["message"]).to eq("working on change_indexes")
     end
   end
 
