@@ -44,11 +44,4 @@ RSpec.feature "user can view their profile page", :vcr do
 
     expect(page).to have_content("You do not belong to any organizations")
   end
-
-  scenario "user sees their repos and their commits" do
-    visit profile_path(@activerecord_user)
-
-    expect(page).to have_content("repo name")
-    expect(page).to have_content("repo commits")
-  end
 end 

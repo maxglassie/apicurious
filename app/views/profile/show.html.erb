@@ -55,26 +55,3 @@
     <% end %>
   </ul>
 </div>
-
-<div>
-  <ul class="list-group">
-  <h3 class="page-header">My Recent Commits</h3>
-    <% @presenter.repos.each do |repo| %></h3>
-      <li class="list-group-item"><%= repo.name %></li>
-          <div>
-              <table class="table">
-                    <tr>
-                      <th>Author</th>
-                      <th> Commit Message </th>
-                    </tr>
-                  <% repo.commits.each do |commit| %></h3>
-                        <tr>
-                          <td><%= commit.commit["author"]["name"] %></td>
-                          <td><%= commit.commit["message"] %></td>
-                        </tr>
-                  <% end %>
-              </table>
-          </div>
-    <% end %>
-  </ul>
-</div>
