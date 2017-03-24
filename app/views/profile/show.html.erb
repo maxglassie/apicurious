@@ -1,59 +1,57 @@
-<%= image_tag(@presenter.user.image) %>
+<%= image_tag(@presenter.user.image, height: '200', width: '200') %>
 <h1> <%= @presenter.user.name %> </h1>
 <h2> <%=  @presenter.user.username %>  </h2>
-<h3> Starred Repos <%= @presenter.starred.count %></h3>
+<h3> Starred Repos: <%= @presenter.starred.count %></h3>
 
-  <ul>
-    <h3>Organizations</h3>
-    <% @presenter.organizations.each do |organization| %></h3>
-      <%= image_tag organization.avatar_url %>
-      <li><%= organization.name %></li>
+  <ul class="list-group">
+    <h3 class="page-header">Organizations</h3>
+    <% if @presenter.organizations.first == nil %>
+          <li class="list-group-item"> You do not belong to any organizations.</h4>
+    <% elsif %>
+          <% @presenter.organizations.each do |organization| %></h3>
+            <%= image_tag organization.avatar_url %>
+            <li class="list-group-item"><%= organization.name %></li>
+          <% end %>
     <% end %>
   </ul>
 
 <div>
-  <ul>
-    <h3>Followers</h3>
-    <% @presenter.followers.each do |follower| %></h3>
-      <%= image_tag follower.avatar_url %>
-      <li><%= follower.login %></li>
-    <% end %>
-  </ul>
-</div>
-
-<div>
-  <ul>
-    <h3> Following </h3>
-    <% @presenter.following.each do |follower| %></h3>
-      <%= image_tag follower.avatar_url %>
-      <li><%= follower.login %></li>
-    <% end %>
-  </ul>
-</div>
-
-<div>
-  <ul>
-  <h3>Repositories</h3>
-    <% @presenter.repos.each do |repo| %></h3>
-      <li><%= repo.name %></li>
-    <% end %>
-  </ul>
-</div>
-
-<div>
-  <h3>Recent Activity</h3>
-      <table>
-        <tr>
-        <th>Who</th>
-        <th>Repository</th>
-        <th>Event Type</th>
-      </tr>
-    <% @presenter.received_events.each do |event| %>
+    <h3 class="page-header"> Followers </h3>
+    <table class="table">
       <tr>
-        <td><%= event.actor["login"] %></td>
-        <td><%= event.repo["name"] %></td>
-        <td><%= event.type %></td>
+        <th></th>
+        <th> Username </th>
       </tr>
+        <% @presenter.followers.each do |follower| %>
+      <tr>
+          <td><%= image_tag follower.avatar_url, height: '200', width: '200' %></td>
+          <td><%= follower.login %></td>
+      </tr>
+        <% end %>
+    </table>
+</div>
+
+<div>
+    <h3 class="page-header"> Following </h3>
+    <table class="table">
+      <tr>
+        <th></th>
+        <th> Username </th>
+      </tr>
+        <% @presenter.following.each do |follower| %>
+      <tr>
+          <td><%= image_tag follower.avatar_url, height: '200', width: '200' %></td>
+          <td><%= follower.login %></td>
+      </tr>
+        <% end %>
+    </table>
+</div>
+
+<div>
+  <ul class="list-group">
+  <h3 class="page-header">My Repositories</h3>
+    <% @presenter.repos.each do |repo| %></h3>
+      <li class="list-group-item"><%= repo.name %></li>
     <% end %>
-  </table>
+  </ul>
 </div>

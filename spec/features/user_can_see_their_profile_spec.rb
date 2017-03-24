@@ -39,16 +39,9 @@ RSpec.feature "user can view their profile page", :vcr do
     expect(page).to have_content("briancaffey")
   end
 
-  scenario "user sees their recent activity" do
-    visit profile_path(@activerecord_user)
-
-    expect(page).to have_content("case-eee")
-    expect(page).to have_content("alfosco/apicurious")
-  end
-
 xscenario "user sees their organizations" do
     visit profile_path(@activerecord_user)
 
     expect(page).to have_content("APICuriousTest")
   end
-end
+end 

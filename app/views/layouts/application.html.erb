@@ -9,6 +9,23 @@
   </head>
 
   <body>
+      <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="https://github.com/">
+            <img alt="Brand" src="https://pbs.twimg.com/profile_images/616309728688238592/pBeeJQDQ.png" height=25 width=25 />
+          </a>
+        </div>
+        <ul class="nav navbar-nav navbar-right">
+            <%- unless current_user == nil -%>
+              <li><%= link_to "Dashboard", dashboard_path(current_user) %></li>
+              <li><%= link_to "Log out", logout_path(current_user) %> </li>
+              <li><%= link_to "My Profile", profile_path(current_user) %></li>
+            <%- else -%>
+              <li><%= link_to "Log In", root_path %> </li>
+            <%- end -%>
+        </ul>
+    </nav>
     <%= yield %>
   </body>
 </html>
