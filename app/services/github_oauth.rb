@@ -1,5 +1,5 @@
 class GithubOauth
-  attr_reader :code, :client_id, :client_secret, :access_token
+  attr_reader :code, :client_id, :client_secret
 
   def initialize(code)
     @code = code
@@ -14,7 +14,7 @@ class GithubOauth
   end
 
   def data
-    oauth_response = Faraday.get("https://api.github.com/user?access_token=#{access_token}")
+    oauth_response = Faraday.get("https://api.github.com/user?access_token=#{@access_token}")
     data = JSON.parse(oauth_response.body)
     data
   end
