@@ -1,9 +1,24 @@
-<h1 class="home"> Welcome, You're Authorized </h1>
+<h1 class="home"> APICurious - Github </h1>
   <h2 class="home"> <%= @presenter.user.username %> </h2>
+  <h2><%= link_to "Profile", profile_path(@presenter.user) %></h2>
+  <h2><%= link_to "Logout", logout_path %></h2>
 
-<ul> <% @presenter.followers.each do |follower| %>
-  <li> <%= follower.login %></li>
-<% end %>
-</ul>
 
-<%= link_to "Logout", logout_path %>
+
+  <div>
+  <h2>Activity Feed</h2>
+      <table>
+        <tr>
+        <th>Who</th>
+        <th>Repository</th>
+        <th>Event Type</th>
+      </tr>
+    <% @presenter.received_events.each do |event| %>
+      <tr>
+        <td><%= event.actor["login"] %></td>
+        <td><%= event.repo["name"] %></td>
+        <td><%= event.type %></td>
+      </tr>
+    <% end %>
+  </table>
+</div>

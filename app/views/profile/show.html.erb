@@ -1,59 +1,58 @@
 <%= image_tag(@presenter.user.image) %>
 <h1> <%= @presenter.user.name %> </h1>
 <h2> <%=  @presenter.user.username %>  </h2>
-<h3> Starred Repos <%= @presenter.starred.count %></h3>
+<%= link_to "Dashboard", dashboard_path(@presenter.user) %>
+<h3> Starred Repos: <%= @presenter.starred.count %></h3>
 
   <ul>
     <h3>Organizations</h3>
-    <% @presenter.organizations.each do |organization| %></h3>
-      <%= image_tag organization.avatar_url %>
-      <li><%= organization.name %></li>
+    <% if @presenter.organizations.first == nil %>
+          <h4> You do not belong to any organizations.</h4>
+    <% elsif %>
+          <% @presenter.organizations.each do |organization| %></h3>
+            <%= image_tag organization.avatar_url %>
+            <li><%= organization.name %></li>
+          <% end %>
     <% end %>
   </ul>
 
 <div>
-  <ul>
-    <h3>Followers</h3>
-    <% @presenter.followers.each do |follower| %></h3>
-      <%= image_tag follower.avatar_url %>
-      <li><%= follower.login %></li>
-    <% end %>
-  </ul>
+    <h3> Followers </h3>
+    <table>
+      <tr>
+        <th></th>
+        <th> Username </th>
+      </tr>
+        <% @presenter.followers.each do |follower| %>
+      <tr>
+          <td><%= image_tag follower.avatar_url %></td>
+          <td><%= follower.login %></td>
+      </tr>
+        <% end %>
+    </table>
 </div>
 
 <div>
-  <ul>
     <h3> Following </h3>
-    <% @presenter.following.each do |follower| %></h3>
-      <%= image_tag follower.avatar_url %>
-      <li><%= follower.login %></li>
-    <% end %>
-  </ul>
+    <table>
+      <tr>
+        <th></th>
+        <th> Username </th>
+      </tr>
+        <% @presenter.following.each do |follower| %>
+      <tr>
+          <td><%= image_tag follower.avatar_url %></td>
+          <td><%= follower.login %></td>
+      </tr>
+        <% end %>
+    </table>
 </div>
 
 <div>
   <ul>
-  <h3>Repositories</h3>
+  <h3>My Repositories</h3>
     <% @presenter.repos.each do |repo| %></h3>
       <li><%= repo.name %></li>
     <% end %>
   </ul>
-</div>
-
-<div>
-  <h3>Recent Activity</h3>
-      <table>
-        <tr>
-        <th>Who</th>
-        <th>Repository</th>
-        <th>Event Type</th>
-      </tr>
-    <% @presenter.received_events.each do |event| %>
-      <tr>
-        <td><%= event.actor["login"] %></td>
-        <td><%= event.repo["name"] %></td>
-        <td><%= event.type %></td>
-      </tr>
-    <% end %>
-  </table>
 </div>
