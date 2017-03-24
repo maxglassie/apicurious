@@ -1,13 +1,12 @@
-<h1 class="home"> APICurious - Github </h1>
-  <h2 class="home"> <%= @presenter.user.username %> </h2>
-  <h2><%= link_to "Profile", profile_path(@presenter.user) %></h2>
-  <h2><%= link_to "Logout", logout_path %></h2>
 
-
+<div>
+  <h1 class="page-header" center=> APICurious - Github </h1>
+  <h2 class="page-header"><%= @presenter.user.username %> </h2>
+</div>
 
   <div>
   <h2>Activity Feed</h2>
-      <table>
+      <table class="table-bordered">
         <tr>
         <th>Who</th>
         <th>Repository</th>

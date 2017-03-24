@@ -1,31 +1,30 @@
-<%= image_tag(@presenter.user.image) %>
+<%= image_tag(@presenter.user.image, height: '200', width: '200') %>
 <h1> <%= @presenter.user.name %> </h1>
 <h2> <%=  @presenter.user.username %>  </h2>
-<%= link_to "Dashboard", dashboard_path(@presenter.user) %>
 <h3> Starred Repos: <%= @presenter.starred.count %></h3>
 
-  <ul>
-    <h3>Organizations</h3>
+  <ul class="list-group">
+    <h3 class="page-header">Organizations</h3>
     <% if @presenter.organizations.first == nil %>
-          <h4> You do not belong to any organizations.</h4>
+          <li class="list-group-item"> You do not belong to any organizations.</h4>
     <% elsif %>
           <% @presenter.organizations.each do |organization| %></h3>
             <%= image_tag organization.avatar_url %>
-            <li><%= organization.name %></li>
+            <li class="list-group-item"><%= organization.name %></li>
           <% end %>
     <% end %>
   </ul>
 
 <div>
-    <h3> Followers </h3>
-    <table>
+    <h3 class="page-header"> Followers </h3>
+    <table class="table">
       <tr>
         <th></th>
         <th> Username </th>
       </tr>
         <% @presenter.followers.each do |follower| %>
       <tr>
-          <td><%= image_tag follower.avatar_url %></td>
+          <td><%= image_tag follower.avatar_url, height: '200', width: '200' %></td>
           <td><%= follower.login %></td>
       </tr>
         <% end %>
@@ -33,15 +32,15 @@
 </div>
 
 <div>
-    <h3> Following </h3>
-    <table>
+    <h3 class="page-header"> Following </h3>
+    <table class="table">
       <tr>
         <th></th>
         <th> Username </th>
       </tr>
         <% @presenter.following.each do |follower| %>
       <tr>
-          <td><%= image_tag follower.avatar_url %></td>
+          <td><%= image_tag follower.avatar_url, height: '200', width: '200' %></td>
           <td><%= follower.login %></td>
       </tr>
         <% end %>
@@ -49,10 +48,10 @@
 </div>
 
 <div>
-  <ul>
-  <h3>My Repositories</h3>
+  <ul class="list-group">
+  <h3 class="page-header">My Repositories</h3>
     <% @presenter.repos.each do |repo| %></h3>
-      <li><%= repo.name %></li>
+      <li class="list-group-item"><%= repo.name %></li>
     <% end %>
   </ul>
 </div>
