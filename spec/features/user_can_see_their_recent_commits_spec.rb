@@ -19,8 +19,7 @@ RSpec.feature "user can view their recent commits page", :vcr do
   scenario "user sees their repos and their commits" do
     visit commit_path(@activerecord_user)
 
-    save_and_open_page
     expect(page).to have_content("advanced_enums")
     expect(page).to have_content("working on change_indexes")
   end
-end 
+end
